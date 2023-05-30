@@ -1,1 +1,1 @@
-web: sport-together-go
+web: sport-together-go -port 80
