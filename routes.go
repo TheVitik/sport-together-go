@@ -7,10 +7,15 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 )
 
 func initRoutes(handler *handlers.Handler) {
 	router := mux.NewRouter()
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		_, err := fmt.Fprintln(writer, "HELLO")
 		if err != nil {
@@ -28,5 +33,5 @@ func initRoutes(handler *handlers.Handler) {
 	router.HandleFunc("/register", handler.Register).Methods("POST")
 	router.HandleFunc("/login", handler.Login).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":80", router))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
