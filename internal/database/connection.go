@@ -18,3 +18,25 @@ func NewConnection() *Connection {
 	}
 	return &Connection{db}
 }
+
+func (c *Connection) Migrate() {
+	_, err := c.Exec(`CREATE TABLE IF NOT EXISTS users (
+		id SERIAL PRIMARY KEY,
+		name VARCHAR(64),
+		email VARCHAR(64),
+    	password VARCHAR(64)
+	)`)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = c.Exec(`CREATE TABLE IF NOT EXISTS events (
+		id SERIAL PRIMARY KEY,
+		name VARCHAR(64),
+		date VARCHAR(32),
+    	details TEXT
+	)`)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
