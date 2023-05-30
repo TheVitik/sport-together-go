@@ -1,1 +1,1 @@
-web: sport-together-go -port $PORT
+web: sport-together-go -port 8080
