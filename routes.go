@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/TheVitik/sport-together-go/internal/handlers"
 	"github.com/TheVitik/sport-together-go/internal/middlewares"
 	"github.com/gorilla/mux"
@@ -10,7 +11,12 @@ import (
 
 func initRoutes(handler *handlers.Handler) {
 	router := mux.NewRouter()
-
+	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+		_, err := fmt.Fprintln(writer, "HELLO")
+		if err != nil {
+			return
+		}
+	})
 	// Event endpoints
 	router.HandleFunc("/events", middlewares.Auth(handler.CreateEvent)).Methods("POST")
 	router.HandleFunc("/events/{id}", handler.GetEvent).Methods("GET")
