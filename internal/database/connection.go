@@ -11,7 +11,7 @@ type Connection struct {
 }
 
 func NewConnection() *Connection {
-	connStr := "postgresql://postgres:11111111@127.0.0.1/postgres?sslmode=disable"
+	connStr := "postgres://ldbdfmntglzcku:a4b8bfea50dd08ff6296b7255318e34b6924f04e6645c4f48cc2ae2a85d47c94@ec2-34-236-103-63.compute-1.amazonaws.com:5432/ddh2kc55mhedcp"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Panic(err)
