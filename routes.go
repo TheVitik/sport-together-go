@@ -1,20 +1,15 @@
 package main
 
 import (
-	"github.com/TheVitik/sport-together-go/internal/database"
 	"github.com/TheVitik/sport-together-go/internal/handlers"
 	"github.com/TheVitik/sport-together-go/internal/middlewares"
-	"github.com/TheVitik/sport-together-go/internal/repositories"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
-func initRoutes() {
+func initRoutes(handler *handlers.Handler) {
 	router := mux.NewRouter()
-
-	repository := repositories.NewRepository(database.NewConnection())
-	handler := handlers.NewHandler(repository)
 
 	// Event endpoints
 	router.HandleFunc("/events", middlewares.Auth(handler.CreateEvent)).Methods("POST")
