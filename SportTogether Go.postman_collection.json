@@ -11,11 +11,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/events",
+					"raw": "{{PATH}}/events",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"events"
 					]
@@ -36,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Test\",\r\n    \"date\":\"13231\",\r\n    \"details\":\"aasdadsadas\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Test\",\r\n    \"date\":\"31-05-23\",\r\n    \"details\":\"aasdadsadas\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -44,11 +43,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/events",
+					"raw": "{{PATH}}/events",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"events"
 					]
@@ -62,11 +60,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/events/1",
+					"raw": "{{PATH}}/events/1",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"events",
 						"1"
@@ -88,14 +85,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Testіі\",\r\n    \"date\":\"13231\",\r\n    \"details\":\"aasdadsadas\"\r\n}"
+					"raw": "{\r\n    \"name\":\"Update\",\r\n    \"date\":\"13231\",\r\n    \"details\":\"aasdadsadas\"\r\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/events/1",
+					"raw": "{{PATH}}/events/1",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"events",
 						"1"
@@ -116,11 +112,10 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/events/1",
+					"raw": "{{PATH}}/events/1",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"events",
 						"1"
@@ -144,11 +139,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/login",
+					"raw": "{{PATH}}/login",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"login"
 					]
@@ -171,11 +165,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/register",
+					"raw": "{{PATH}}/register",
 					"host": [
-						"localhost"
+						"{{PATH}}"
 					],
-					"port": "8080",
 					"path": [
 						"register"
 					]
@@ -208,6 +201,10 @@
 		{
 			"key": "TOKEN",
 			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1haWxAdWtyLm5ldCIsImV4cCI6MTY4NDMyNzcxOCwiaWQiOjF9.77LCeG8RQpkEQ15lurIWuzezOfMIHMYfk8iXsBYLxHA"
+		},
+		{
+			"key": "PATH",
+			"value": "localhost:8080"
 		}
 	]
 }
