@@ -36,11 +36,18 @@ func (r *Repository) GetEvents() ([]models.Event, error) {
 	return events, nil
 }
 
-func (r *Repository) SaveEvent(event models.Event) (models.Event, error) {
-	query := "INSERT INTO events (name, date, details) VALUES ($1, $2, $3) RETURNING id"
-	row := r.db.QueryRow(query, event.Name, event.Date, event.Details)
+func (r *Repository) SaveEvent(event *models.Event) (*models.Event, error) {
+	query := "INSERT INTO events (name, date, details) VALUES ($1, $2, $3)"
+	result, err := r.db.Exec(query, event.Name, event.Date, event.Details)
+	if err != nil {
+		return nil, err
+	}
+	id, err := result.LastInsertId()
+	if err != nil {
+		return nil, err
+	}
 
-	var err = row.Scan(&event.ID)
+	event.ID = int(id)
 	return event, err
 }
 

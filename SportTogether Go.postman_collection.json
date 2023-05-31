@@ -7,6 +7,30 @@
 	"item": [
 		{
 			"name": "Get Events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if event with id1 is Test\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name).to.eql(\"Test\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if events count is 4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if events is not empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).not.eql(\"null\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -24,6 +48,20 @@
 		},
 		{
 			"name": "Create Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if created event returned\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -56,6 +94,25 @@
 		},
 		{
 			"name": "Get Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if event returned\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if event parameters count is 4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -74,6 +131,25 @@
 		},
 		{
 			"name": "Update Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if event id identical\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if event name updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Update\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -102,6 +178,24 @@
 		},
 		{
 			"name": "Delete Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if event deleted\", function () {\r",
+							"    var response = pm.response.text();\r",
+							"    pm.expect(response).to.eql(\"Event with ID 4 is deleted successfully\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if event not found\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Event not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -112,13 +206,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{PATH}}/events/1",
+					"raw": "{{PATH}}/events/4",
 					"host": [
 						"{{PATH}}"
 					],
 					"path": [
 						"events",
-						"1"
+						"4"
 					]
 				}
 			},
@@ -126,6 +220,28 @@
 		},
 		{
 			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if user created\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.token).not.eql(undefined);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if user not exists\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if password incorrect\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Incorrect password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -152,6 +268,24 @@
 		},
 		{
 			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if user created\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).not.eql(undefined);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if user exists\",() => {\r",
+							"  pm.expect(pm.response.text()).to.include(\"User already exists\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
