@@ -5,11 +5,18 @@ import (
 	"github.com/TheVitik/sport-together-go/internal/models"
 )
 
-func (r *Repository) SaveUser(user models.User) (models.User, error) {
-	query := "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id"
-	row := r.db.QueryRow(query, user.Name, user.Email, user.Password)
+func (r *Repository) SaveUser(user *models.User) (*models.User, error) {
+	query := "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)"
+	result, err := r.db.Exec(query, user.Name, user.Email, user.Password)
+	if err != nil {
+		return nil, err
+	}
+	id, err := result.LastInsertId()
+	if err != nil {
+		return nil, err
+	}
 
-	var err = row.Scan(&user.ID)
+	user.ID = int(id)
 	return user, err
 }
 

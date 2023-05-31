@@ -10,28 +10,30 @@ import (
 	"os"
 )
 
-func initRoutes(handler *handlers.Handler) {
-	router := mux.NewRouter()
+var Router *mux.Router
+
+func InitRoutes(handler *handlers.Handler) {
+	Router = mux.NewRouter()
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
-	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+	Router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		_, err := fmt.Fprintln(writer, "HELLO")
 		if err != nil {
 			return
 		}
 	})
 	// Event endpoints
-	router.HandleFunc("/events", middlewares.Auth(handler.CreateEvent)).Methods("POST")
-	router.HandleFunc("/events/{id}", handler.GetEvent).Methods("GET")
-	router.HandleFunc("/events", handler.GetAllEvents).Methods("GET")
-	router.HandleFunc("/events/{id}", middlewares.Auth(handler.UpdateEvent)).Methods("PUT")
-	router.HandleFunc("/events/{id}", middlewares.Auth(handler.DeleteEvent)).Methods("DELETE")
+	Router.HandleFunc("/events", middlewares.Auth(handler.CreateEvent)).Methods("POST")
+	Router.HandleFunc("/events/{id}", handler.GetEvent).Methods("GET")
+	Router.HandleFunc("/events", handler.GetAllEvents).Methods("GET")
+	Router.HandleFunc("/events/{id}", middlewares.Auth(handler.UpdateEvent)).Methods("PUT")
+	Router.HandleFunc("/events/{id}", middlewares.Auth(handler.DeleteEvent)).Methods("DELETE")
 
 	// User endpoints
-	router.HandleFunc("/register", handler.Register).Methods("POST")
-	router.HandleFunc("/login", handler.Login).Methods("POST")
+	Router.HandleFunc("/register", handler.Register).Methods("POST")
+	Router.HandleFunc("/login", handler.Login).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, Router))
 }

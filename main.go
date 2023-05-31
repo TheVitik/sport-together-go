@@ -13,5 +13,5 @@ func main() {
 	repository := repositories.NewRepository(connection)
 	handler := handlers.NewHandler(repository)
 
-	initRoutes(handler)
+	InitRoutes(handler)
 }
